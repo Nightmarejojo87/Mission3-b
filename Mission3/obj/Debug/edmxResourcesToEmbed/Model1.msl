@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="gsb2023_sqlserverModelStoreContainer" CdmEntityContainer="gsb2023_sqlserverEntities3">
+    <EntitySetMapping Name="famille">
+      <EntityTypeMapping TypeName="gsb2023_sqlserverModel.famille">
+        <MappingFragment StoreEntitySet="famille">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="libelle" ColumnName="libelle" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="medicament">
+      <EntityTypeMapping TypeName="gsb2023_sqlserverModel.medicament">
+        <MappingFragment StoreEntitySet="medicament">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="nomCommercial" ColumnName="nomCommercial" />
+          <ScalarProperty Name="idFamille" ColumnName="idFamille" />
+          <ScalarProperty Name="composition" ColumnName="composition" />
+          <ScalarProperty Name="effets" ColumnName="effets" />
+          <ScalarProperty Name="contreIndications" ColumnName="contreIndications" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="offrir">
+      <EntityTypeMapping TypeName="gsb2023_sqlserverModel.offrir">
+        <MappingFragment StoreEntitySet="offrir">
+          <ScalarProperty Name="idRapport" ColumnName="idRapport" />
+          <ScalarProperty Name="idMedicament" ColumnName="idMedicament" />
+          <ScalarProperty Name="quantite" ColumnName="quantite" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

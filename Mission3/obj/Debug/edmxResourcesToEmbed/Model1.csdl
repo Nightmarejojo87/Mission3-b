@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="gsb2023_sqlserverModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="famille">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="libelle" Type="String" MaxLength="80" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="medicament" Relationship="Self.medicament_fk" FromRole="famille" ToRole="medicament" />
+  </EntityType>
+  <EntityType Name="medicament">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="nomCommercial" Type="String" MaxLength="80" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="idFamille" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="composition" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="effets" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="contreIndications" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="famille" Relationship="Self.medicament_fk" FromRole="medicament" ToRole="famille" />
+    <NavigationProperty Name="offrir" Relationship="Self.offrir_fk2" FromRole="medicament" ToRole="offrir" />
+  </EntityType>
+  <EntityType Name="offrir">
+    <Key>
+      <PropertyRef Name="idRapport" />
+      <PropertyRef Name="idMedicament" />
+    </Key>
+    <Property Name="idRapport" Type="Int32" Nullable="false" />
+    <Property Name="idMedicament" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="quantite" Type="Int32" />
+    <NavigationProperty Name="medicament" Relationship="Self.offrir_fk2" FromRole="offrir" ToRole="medicament" />
+  </EntityType>
+  <Association Name="medicament_fk">
+    <End Role="famille" Type="Self.famille" Multiplicity="1" />
+    <End Role="medicament" Type="Self.medicament" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="famille">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="medicament">
+        <PropertyRef Name="idFamille" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="offrir_fk2">
+    <End Role="medicament" Type="Self.medicament" Multiplicity="1" />
+    <End Role="offrir" Type="Self.offrir" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="medicament">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="offrir">
+        <PropertyRef Name="idMedicament" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="gsb2023_sqlserverEntities3" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="famille" EntityType="Self.famille" />
+    <EntitySet Name="medicament" EntityType="Self.medicament" />
+    <EntitySet Name="offrir" EntityType="Self.offrir" />
+    <AssociationSet Name="medicament_fk" Association="Self.medicament_fk">
+      <End Role="famille" EntitySet="famille" />
+      <End Role="medicament" EntitySet="medicament" />
+    </AssociationSet>
+    <AssociationSet Name="offrir_fk2" Association="Self.offrir_fk2">
+      <End Role="medicament" EntitySet="medicament" />
+      <End Role="offrir" EntitySet="offrir" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
